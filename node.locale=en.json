@@ -1,0 +1,14 @@
+{
+	"$hyoo_invest_stock_row_Duration_block_title": "Duration",
+	"$hyoo_invest_stock_row_Enter_amount_block_title": "Enter amount",
+	"$hyoo_invest_stock_row_Enter_date_block_title": "Enter date",
+	"$hyoo_invest_stock_row_Exit_amount_block_title": "Exit amount",
+	"$hyoo_invest_stock_row_Exit_date_block_title": "Exit date",
+	"$hyoo_invest_stock_row_Income_block_title": "Income",
+	"$hyoo_invest_stock_row_Rate_block_title": "Annual rate",
+	"$hyoo_invest_stock_row_title_block_label": "Title",
+	"$hyoo_invest_title": "Private investments",
+	"$mol_date_next_hint": "Next month",
+	"$mol_date_prev_hint": "Previous month",
+	"$mol_lights_toggle_hint": "Toggle lights"
+}

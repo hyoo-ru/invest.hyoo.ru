@@ -1,0 +1,447 @@
+$mol_speck $mol_view
+	attr *
+		^
+		mol_theme \$mol_theme_accent
+	style *
+		^
+		minHeight \1em
+	sub /
+		<= value null
+
+$mol_button $mol_view
+	enabled true
+	minimal_height 40
+	click?event null
+	event_click?event null
+	event *
+		^
+		click?event <=> event_activate?event null
+		keypress?event <=> event_key_press?event null 
+	attr *
+		^
+		disabled <= disabled false
+		role \button
+		tabindex <= tab_index 0
+		title <= hint_or_error <= hint \
+	sub /$mol_view_content
+		<= title
+	Speck $mol_speck
+
+$mol_scroll $mol_view
+	minimal_height 0
+	_event_scroll_timer?val null
+	field *
+		^
+		scrollTop <= scroll_top?val 0
+		scrollLeft <= scroll_left?val 0
+		tabIndex <= tabindex -1
+	event *
+		^
+		scroll?event <=> event_scroll?event null
+
+$mol_page $mol_view
+	sub /
+		<= Head $mol_view
+			sub <= head /
+				<= Title $mol_button
+					sub /
+						<= title
+					event_click?val <=> event_top?val null
+				<= Tools $mol_view
+					sub <= tools /$mol_view_content
+		<= Body $mol_scroll
+			scroll_top?val <=> body_scroll_top?val 0
+			sub <= body /$mol_view_content
+		<= Foot $mol_view
+			sub <= foot /$mol_view
+
+$mol_row $mol_view
+
+$mol_hotkey $mol_plugin
+	event *
+		^
+		keydown?event <=> keydown?event null
+	key *
+	mod_ctrl false
+	mod_alt false
+	mod_shift false
+
+$mol_string $mol_view
+	dom_name \input
+	enabled true
+	minimal_height 40
+	autocomplete false
+	field *
+		^
+		disabled <= disabled false
+		value <= value_changed?val <=> value?val \
+		placeholder <= hint \
+		type <= type?val \text
+		spellcheck <= spellcheck false
+		autocomplete <= autocomplete_native \
+	attr *
+		^
+		maxlength <= length_max Infinity
+	event *
+		^
+		input?event <=> event_change?event null
+		keydown?event <=> event_key_press?event null
+	plugins /
+		<= Submit $mol_hotkey
+			key * enter?event <=> submit?event null
+
+$mol_list $mol_view
+	render_visible_only true
+	render_over 0.5
+	sub <= rows /$mol_view
+	Empty $mol_view
+	Gap_before $mol_view style * paddingTop <= gap_before 0
+	Gap_after $mol_view style * paddingTop <= gap_after 0
+	view_window /
+		0
+		0
+
+$mol_labeler $mol_list
+	rows /
+		<= Title $mol_view
+			minimal_height 24
+			sub <= label /$mol_view_content
+				<= title
+		<= Content $mol_view
+			minimal_height 24
+			sub <= content /
+
+$mol_svg $mol_view
+	dom_name \svg
+	dom_name_space \http://www.w3.org/2000/svg
+	font_size 16
+	font_family \
+
+$mol_svg_root $mol_svg
+	dom_name \svg
+	attr *
+		^
+		viewBox <= view_box \0 0 100 100
+		preserveAspectRatio <= aspect \xMidYMid
+
+$mol_svg_path $mol_svg
+	dom_name \path
+	attr *
+		^
+		d <= geometry \
+
+
+$mol_icon $mol_svg_root
+	view_box \0 0 24 24
+	minimal_width 16
+	minimal_height 16
+	sub /
+		<= Path $mol_svg_path
+			geometry <= path \
+
+$mol_icon_minus $mol_icon path \M19,13H5V11H19V13Z
+
+$mol_button_typed $mol_button
+
+$mol_button_minor $mol_button_typed
+
+$mol_icon_plus $mol_icon path \M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z
+
+$mol_number $mol_view
+	precision_view <= precision 1
+	precision_change <= precision 1
+	value?val NaN
+	sub /
+		<= String $mol_string
+			type \number
+			value?val <=> value_string?val \
+			hint <= hint \
+			enabled <= string_enabled <= enabled true
+		<= Dec $mol_button_minor
+			event_click?val <=> event_dec?val null
+			enabled <= dec_enabled <= enabled true
+			sub / <= dec_icon $mol_icon_minus
+		<= Inc $mol_button_minor
+			event_click?val <=> event_inc?val null
+			enabled <= inc_enabled <= enabled true
+			sub / <= inc_icon $mol_icon_plus
+
+
+$hyoo_invest_labeler $mol_labeler
+	attr * 
+		^
+		hyoo_invest_labeler_mood <= mood \
+
+$mol_meter $mol_plugin
+	zoom 1
+	-
+	width?val 0
+	height?val 0
+	-
+	left?val 0
+	right?val 0
+	bottom?val 0
+	top?val 0
+
+$mol_pop $mol_view
+	event * keydown?event <=> keydown?event null
+	showed?val false
+	plugins /$mol_plugin
+		<= Meter $mol_meter
+			top => top
+			bottom => bottom
+			left => left
+			right => right
+	sub /
+		<= Anchor null
+		<= Bubble $mol_pop_bubble
+			align <= align \bottom_center
+			content <= bubble_content /$mol_view_content
+			height_max <= height_max 9999
+
+$mol_pop_bubble $mol_scroll
+	sub <= content /$mol_view_content
+	style *
+		^
+		maxHeight <= height_max 9999
+	attr *
+		^
+		mol_pop_align <= align \
+		tabindex 0
+
+$mol_icon_chevron $mol_icon path \M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z
+
+$mol_icon_chevron_left $mol_icon path \M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z
+
+$mol_icon_chevron_right $mol_icon path \M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z
+
+$mol_hor $mol_view
+
+$mol_calendar $mol_list
+	sub /
+		<= Head $mol_view
+			sub <= head /
+				<= Title $mol_view
+					minimal_height 24
+					sub /
+						<= title \
+		<= Weekdays $mol_hor
+			sub <= weekdays /$mol_view
+	weeks /$mol_view
+	-
+	Weekday!index $mol_calendar_day
+		holiday <= weekend!index false
+		sub /
+			<= weekday!index \
+	-
+	Week!row $mol_hor
+		sub <= week_days!row /$mol_view
+	-
+	Day!day $mol_calendar_day
+		ghost <= day_ghost!day false
+		holiday <= day_holiday!day false
+		selected <= day_selected!day false
+		theme <= day_theme!day \
+		sub <= day_content!day /
+			<= day_text!day \
+	-
+	month_string \
+	month_moment $mol_time_moment
+
+$mol_calendar_day $mol_view
+	minimal_height 24
+	minimal_width 36
+	attr *
+		mol_calendar_holiday <= holiday false
+		mol_calendar_ghost <= ghost false
+		mol_calendar_selected <= selected false
+		mol_theme <= theme \
+
+$mol_date $mol_pop
+	Anchor <= Input $mol_string
+		value?val <=> value?val \
+		hint <= hint \YYYY-MM-DD
+		enabled <= enabled true
+		length_max 10
+	-
+	bubble_content /
+		<= Calendar $mol_date_calendar
+			month_moment <= month_moment <= value
+			day_selected!day <= day_selected!day false
+			day_click!day?event <=> day_click!day?event null
+			Title => Calendar_title
+			head /
+				<= Calendar_tools $mol_view
+					sub /
+						<= Prev $mol_button_minor
+							hint <= prev_hint @ \Previous month
+							click?event <=> prev?event null
+							sub /
+								<= Prev_icon $mol_icon_chevron_left
+						<= Calendar_title
+						<= Next $mol_button_minor
+							hint <= next_hint @ \Next month
+							click?event <=> next?event null
+							sub /
+								<= Next_icon $mol_icon_chevron_right
+	-
+	value_number?val NaN
+	value_moment?val $mol_time_moment
+
+$mol_date_calendar $mol_calendar
+	day_content!day /
+		<= Day_button!day $mol_button_minor
+			title <= day_text!day
+			event_click?event <=> day_click!day?event null
+			minimal_height 24
+
+$hyoo_invest_stock_row $mol_row
+	stock $hyoo_invest_stock / *
+	sub /
+		<= Info $hyoo_invest_stock_row_group sub /
+			<= Main $hyoo_invest_stock_row_group sub /
+				<= Title_block $mol_labeler
+					label /
+						<= title_block_label @ \Title
+						<= Tools $mol_view
+							minimal_height 24
+							sub <= tools /
+					Content <= Title $mol_string
+						value?val <=> title?val \
+						enabled <= enabled true
+				<= Rate_block $hyoo_invest_labeler
+					title @ \Annual rate
+					mood <= result_mood \
+					Content <= Rate $mol_number
+						value?val <=> rate_annual?val 0
+						enabled <= enabled true
+			<= Results $hyoo_invest_stock_row_group sub /
+				<= Income_block $hyoo_invest_labeler
+					title @ \Income
+					mood <= result_mood \
+					Content <= Income $mol_number
+						value?val <=> income?val 0
+						enabled false
+				<= Duration_block $mol_labeler
+					title @ \Duration
+					Content <= Duration $mol_number
+						value?val <=> duration?val 0
+						enabled false
+		<= Metrics $hyoo_invest_stock_row_group sub /
+			<= Enter $hyoo_invest_stock_row_group sub /
+				<= Enter_amount_block $mol_labeler
+					title @ \Enter amount
+					Content <= Enter_amount $mol_number
+						value?val <=> enter_amount?val 0
+						enabled <= enabled true
+				<= Enter_date_block $mol_labeler
+					title @ \Enter date
+					Content <= Enter_date $mol_date
+						value_moment?val <=> enter_date?val $mol_time_moment
+						enabled <= enabled true
+			<= Exit $hyoo_invest_stock_row_group sub /
+				<= Exit_amount_block $mol_labeler
+					title @ \Exit amount
+					Content <= Exit_amount $mol_number
+						value?val <=> exit_amount?val 0
+						enabled <= enabled true
+				<= Exit_date_block $hyoo_invest_labeler
+					title @ \Exit date
+					mood <= exit_date_mood \
+					Content <= Exit_date $mol_date
+						value_moment?val <=> exit_date?val $mol_time_moment
+						enabled <= enabled true
+
+$hyoo_invest_stock_row_group $mol_view
+
+
+$mol_theme_auto $mol_plugin
+	attr * mol_theme <= theme \
+
+$mol_check $mol_button_minor
+	attr *
+		^
+		mol_check_checked <= checked?val false
+		aria-checked <= checked?val false
+		role \checkbox
+	sub /
+		<= Icon null
+		<= label /
+			<= Title $mol_view
+				sub /
+					<= title \
+
+$mol_check_icon $mol_check
+
+$mol_icon_brightness_6 $mol_icon path \M12,18V6C15.31,6 18,8.69 18,12C18,15.31 15.31,18 12,18M20,15.31L23.31,12L20,8.69V4H15.31L12,0.69L8.69,4H4V8.69L0.69,12L4,15.31V20H8.69L12,23.31L15.31,20H20V15.31Z
+
+$mol_lights_toggle $mol_check_icon
+	Icon <= Lights_icon $mol_icon_brightness_6
+	hint @ \Toggle lights
+	checked?val <=> lights?val false
+
+$mol_icon_cross $mol_icon path \M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z
+
+$hyoo_invest $mol_page
+	plugins /
+		<= Theme $mol_theme_auto
+	tools /
+		<= Lights $mol_lights_toggle
+	title @ \Private investments
+	body /
+		<= Stock_list $mol_list rows <= stock_rows <= stock_list /
+	-
+	store $hyoo_invest_store / *
+		stocks /
+	Stock_row!id $hyoo_invest_stock_row
+		stock <= stock!id $hyoo_invest_stock / *
+		tools <= stock_row_tools!id /
+			<= Stock_drop!id $mol_button_minor
+				click?event <=> stock_drop!id?event null
+				sub /
+					<= Stock_drop_icon!id $mol_icon_cross
+	Stock_summary $hyoo_invest_stock_row
+		enabled false
+		rate_annual <= rate_annual 0
+		stock <= stock_summary $hyoo_invest_stock / *
+			title \Summary
+			enter_amount <= enter_amount 0
+			enter_date <= enter_date \
+			exit_amount <= exit_amount 0
+			exit_date <= exit_date \
+
+$mol_view_tree_test_attributes_super $mol_view
+	some *
+		a 0
+		b 2
+
+$mol_view_tree_test_attributes $mol_view_tree_test_attributes_super
+	some *
+		^
+		a 1
+
+$mol_view_tree_test_binding $mol_view
+	value?val <=> task_title_new?val \123
+	enabled <= head_complete_enabled false
+
+$mol_view_tree_test_binding_right $mol_view
+	Test $mol_view_tree_test_binding_right_test
+		width?v => outer_width?v
+
+$mol_view_tree_test_binding_right_test $mol_view
+	width?val 0
+
+$mol_view_tree_test_simple $mol_view
+	some 1
+	bool true
+	str \test
+	arr /
+	arr_string /string
+
+$mol_view_tree_test_attributes_subcomponent $mol_view
+	- Comment
+	Page!index $mol_view_tree_test_attributes_subcomponent_page
+		Sub <= page!index null
+
+$mol_view_tree_test_attributes_subcomponent_page $mol_view
+	Sub null
