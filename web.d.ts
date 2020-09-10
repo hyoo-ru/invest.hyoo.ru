@@ -2221,6 +2221,7 @@ declare namespace $ {
         Stock_drop(id: any): $mol_button_minor;
         stock_row_tools(id: any): readonly any[];
         rate_annual(): number;
+        stock_summary_title(): string;
         enter_amount(): number;
         enter_date(): string;
         exit_amount(): number;

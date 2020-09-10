@@ -404,7 +404,7 @@ $hyoo_invest $mol_page
 		enabled false
 		rate_annual <= rate_annual 0
 		stock <= stock_summary $hyoo_invest_stock / *
-			title \Summary
+			title <= stock_summary_title @ \Summary
 			enter_amount <= enter_amount 0
 			enter_date <= enter_date \
 			exit_amount <= exit_amount 0
