@@ -2,6 +2,8 @@ $hyoo_invest $mol_page
 	plugins /
 		<= Theme $mol_theme_auto
 	tools /
+		<= Sources $mol_link_source
+			uri \https://github.com/hyoo-ru/invest.hyoo.ru
 		<= Lights $mol_lights_toggle
 	title @ \Private investments
 	body /
