@@ -63,7 +63,7 @@ namespace $.$$ {
 			]
 		}
 
-		stock_drop( id : string ) {
+		stock_drop( id : number ) {
 			this.store().stock_drop( id )
 		}
 
