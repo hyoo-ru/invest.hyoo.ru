@@ -2130,6 +2130,84 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+    class $mol_link extends $mol_view {
+        dom_name(): string;
+        attr(): {
+            href: string;
+            title: string;
+            target: string;
+            download: string;
+            mol_link_current: boolean;
+            mol_theme: any;
+        };
+        sub(): readonly $mol_view_content[];
+        arg(): {};
+        event(): {
+            click: (event?: any) => any;
+        };
+        uri(): string;
+        hint(): string;
+        target(): string;
+        file_name(): string;
+        current(): boolean;
+        theme(): any;
+        event_click(event?: any): any;
+        click(event?: any): any;
+    }
+}
+
+declare namespace $ {
+    class $mol_state_arg extends $mol_object {
+        prefix: string;
+        static href(next?: string): string;
+        static dict(next?: {
+            [key: string]: string | null;
+        }): {
+            [key: string]: string;
+        };
+        static value(key: string, next?: string | null): string | null;
+        static link(next: any): string;
+        static make_link(next: {
+            [key: string]: any;
+        }): string;
+        constructor(prefix?: string);
+        value(key: string, next?: string): string | null;
+        sub(postfix: string): $mol_state_arg;
+        link(next: {
+            [key: string]: string;
+        }): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $.$$ {
+    class $mol_link extends $.$mol_link {
+        uri(): string;
+        current(): boolean;
+        event_click(event?: Event): void;
+        file_name(): string;
+        minimal_height(): number;
+        theme(): "$mol_theme_base" | null;
+    }
+}
+
+declare namespace $ {
+    class $mol_icon_github_circle extends $mol_icon {
+        path(): string;
+    }
+}
+
+declare namespace $ {
+    class $mol_link_source extends $mol_link {
+        hint(): string;
+        sub(): readonly any[];
+        Icon(): $mol_icon_github_circle;
+    }
+}
+
+declare namespace $ {
     class $mol_check extends $mol_button_minor {
         attr(): {
             mol_check_checked: any;
@@ -2212,6 +2290,7 @@ declare namespace $ {
         Stock_row(id: any): $$.$hyoo_invest_stock_row;
         Stock_summary(): $$.$hyoo_invest_stock_row;
         Theme(): $$.$mol_theme_auto;
+        Sources(): $mol_link_source;
         Lights(): $$.$mol_lights_toggle;
         stock_list(): readonly any[];
         stock_rows(): readonly any[];
