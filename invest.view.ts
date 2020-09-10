@@ -9,11 +9,15 @@ namespace $.$$ {
 
 		@ $mol_mem
 		stock_rows() {
+
+			const stocks = this.store().stocks()
+			
 			return [
-				this.Stock_summary(),
+				... ( stocks.length > 1 ) ? [ this.Stock_summary() ] : [],
 				... this.stock_list(),
-				this.Stock_row( this.store().stocks().length ),
+				this.Stock_row( stocks.length ),
 			]
+
 		}
 
 		@ $mol_mem

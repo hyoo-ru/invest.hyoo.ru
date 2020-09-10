@@ -37,6 +37,12 @@ namespace $ {
 
 		justifyContent: 'flex-end',
 
+		':first-child': {
+			box: {
+				shadow: 'none',
+			},
+		},
+
 		box: {
 			shadow: [{
 				x: 0,

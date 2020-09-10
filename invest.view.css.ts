@@ -13,14 +13,6 @@ namespace $ {
 			margin: 'auto',
 		},
 
-		Stock_summary: {
-
-			box: {
-				shadow: 'none',
-			},
-			
-		},
-
 	} )
 
 }
