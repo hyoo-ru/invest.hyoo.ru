@@ -45,7 +45,7 @@ namespace $ {
 			}
 			
 			if( rate ) {
-				amount ??= this.value( 'enter_amount' ) * ( 1 + rate / 100 ) * this.duration()
+				amount ??= this.value( 'enter_amount' ) * ( 1 + rate / 100 * this.duration() )
 			}
 			
 			return amount ?? 0
