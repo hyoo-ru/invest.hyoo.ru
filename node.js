@@ -4668,7 +4668,7 @@ var $;
                 this.exit_date(this.exit_date());
             }
             if (rate) {
-                amount !== null && amount !== void 0 ? amount : (amount = this.value('enter_amount') * (1 + rate / 100) * this.duration());
+                amount !== null && amount !== void 0 ? amount : (amount = this.value('enter_amount') * (1 + rate / 100 * this.duration()));
             }
             return amount !== null && amount !== void 0 ? amount : 0;
         }
