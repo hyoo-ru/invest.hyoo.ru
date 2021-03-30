@@ -138,12 +138,10 @@ declare namespace $ {
     var $mol_dom_context: typeof globalThis;
 }
 
-/// <reference types="node" />
 interface $node {
     [key: string]: any;
 }
 declare var $node: $node;
-declare const $node_require: NodeRequire;
 
 declare namespace $ {
 }
@@ -1900,10 +1898,66 @@ declare namespace $ {
 
 declare namespace $.$$ {
     class $mol_pop extends $.$mol_pop {
+        showed(next?: boolean): boolean;
         sub(): any[];
         height_max(): number;
         align(): string;
+        align_vert(): "suspense" | "top" | "bottom";
+        align_hor(): "suspense" | "left" | "right";
         keydown(event: KeyboardEvent): void;
+    }
+}
+
+declare namespace $ {
+    class $mol_check extends $mol_button_minor {
+        attr(): {
+            mol_check_checked: any;
+            "aria-checked": any;
+            role: string;
+            disabled: boolean;
+            tabindex: number;
+            title: string;
+        };
+        sub(): readonly $mol_view_content[];
+        checked(val?: any): any;
+        Icon(): any;
+        title(): string;
+        Title(): $mol_view;
+        label(): readonly any[];
+    }
+}
+
+declare namespace $ {
+    function $mol_maybe<Value>(value: Value | null | undefined): Value[];
+}
+
+declare namespace $ {
+}
+
+declare namespace $.$$ {
+    class $mol_check extends $.$mol_check {
+        click(next?: Event): void;
+        sub(): readonly $mol_view_content[];
+        label(): readonly any[];
+    }
+}
+
+declare namespace $ {
+    class $mol_pick extends $mol_pop {
+        Anchor(): $$.$mol_check;
+        enabled(): boolean;
+        trigger_content(): readonly $mol_view_content[];
+        hint(): string;
+        Trigger(): $$.$mol_check;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+    class $mol_icon_calendar extends $mol_icon {
+        path(): string;
     }
 }
 
@@ -2006,8 +2060,8 @@ declare namespace $.$mol {
 }
 
 declare namespace $ {
-    class $mol_date extends $mol_pop {
-        Anchor(): $$.$mol_string;
+    class $mol_date extends $mol_pick {
+        Icon(): $mol_icon_calendar;
         bubble_content(): readonly any[];
         value_number(val?: any): any;
         value_moment(val?: any): any;
@@ -2046,10 +2100,10 @@ declare namespace $ {
 
 declare namespace $.$$ {
     class $mol_date extends $.$mol_date {
+        trigger_content(): (string | $mol_icon_calendar)[];
         value(val?: string): string;
         value_moment(val?: $mol_time_moment | null): $mol_time_moment | null;
         month_moment(next?: $mol_time_moment): $mol_time_moment;
-        showed(next?: boolean): boolean;
         day_selected(day: string): boolean;
         day_click(day: string): void;
         prev(): void;
@@ -2213,40 +2267,6 @@ declare namespace $ {
         hint(): string;
         sub(): readonly any[];
         Icon(): $mol_icon_github_circle;
-    }
-}
-
-declare namespace $ {
-    class $mol_check extends $mol_button_minor {
-        attr(): {
-            mol_check_checked: any;
-            "aria-checked": any;
-            role: string;
-            disabled: boolean;
-            tabindex: number;
-            title: string;
-        };
-        sub(): readonly any[];
-        checked(val?: any): any;
-        Icon(): any;
-        title(): string;
-        Title(): $mol_view;
-        label(): readonly any[];
-    }
-}
-
-declare namespace $ {
-    function $mol_maybe<Value>(value: Value | null | undefined): Value[];
-}
-
-declare namespace $ {
-}
-
-declare namespace $.$$ {
-    class $mol_check extends $.$mol_check {
-        click(next?: Event): void;
-        sub(): any[];
-        label(): readonly any[];
     }
 }
 
