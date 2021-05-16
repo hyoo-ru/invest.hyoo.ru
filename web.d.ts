@@ -1590,12 +1590,15 @@ declare namespace $ {
         enabled(): boolean;
         minimal_height(): number;
         autocomplete(): boolean;
+        auto(): readonly any[];
         field(): {
             disabled: boolean;
             value: any;
             placeholder: string;
             spellcheck: boolean;
             autocomplete: string;
+            selectionEnd: any;
+            selectionStart: any;
         };
         attr(): {
             maxlength: number;
@@ -1606,12 +1609,15 @@ declare namespace $ {
             keydown: (event?: any) => any;
         };
         plugins(): readonly any[];
+        selection_watcher(): any;
         disabled(): boolean;
         value(val?: any): any;
         value_changed(val?: any): any;
         hint(): string;
         spellcheck(): boolean;
         autocomplete_native(): string;
+        selection_end(val?: any): any;
+        selection_start(val?: any): any;
         length_max(): number;
         type(val?: any): any;
         event_change(event?: any): any;
@@ -1629,6 +1635,8 @@ declare namespace $.$$ {
         event_change(next?: Event): void;
         disabled(): boolean;
         autocomplete_native(): "on" | "off";
+        selection_watcher(): $mol_dom_listener;
+        selection_change(event: Event): void;
     }
 }
 
