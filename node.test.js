@@ -3931,6 +3931,9 @@ var $;
             this.data(Object.assign(new Constr, data, { [key]: next }));
             return next;
         }
+        selection(key, next = [0, 0]) {
+            return next;
+        }
         sub(key, lens) {
             if (!lens)
                 lens = new $mol_store();
@@ -3954,6 +3957,9 @@ var $;
     __decorate([
         $.$mol_mem
     ], $mol_store.prototype, "data", null);
+    __decorate([
+        $.$mol_mem_key
+    ], $mol_store.prototype, "selection", null);
     $.$mol_store = $mol_store;
 })($ || ($ = {}));
 //store.js.map
@@ -5934,7 +5940,9 @@ var $;
                 }
                 const precisionView = this.precision_view();
                 const value = next ? Number(next) : this.value();
-                if (value === null)
+                if (value === 0)
+                    return '0';
+                if (!value)
                     return '';
                 if (precisionView >= 1) {
                     return (value / precisionView).toFixed();
