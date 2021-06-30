@@ -942,15 +942,15 @@ declare namespace $ {
         minimal_height(): number;
         _event_scroll_timer(val?: any): any;
         field(): {
-            scrollTop: any;
-            scrollLeft: any;
+            scrollTop: number;
+            scrollLeft: number;
             tabIndex: number;
         };
         event(): {
             scroll: (event?: any) => any;
         };
-        scroll_top(val?: any): any;
-        scroll_left(val?: any): any;
+        scroll_top(val?: any): number;
+        scroll_left(val?: any): number;
         tabindex(): number;
         event_scroll(event?: any): any;
     }
@@ -1014,7 +1014,7 @@ declare namespace $ {
         Tools(): $mol_view;
         head(): readonly any[];
         Head(): $mol_view;
-        body_scroll_top(val?: any): any;
+        body_scroll_top(val?: any): number;
         body(): readonly $mol_view_content[];
         Body(): $$.$mol_scroll;
         foot(): readonly $mol_view[];
@@ -1597,11 +1597,11 @@ declare namespace $ {
         enabled(): boolean;
         minimal_height(): number;
         autocomplete(): boolean;
-        selection(val?: any): any;
+        selection(val?: any): readonly number[];
         auto(): readonly any[];
         field(): {
             disabled: boolean;
-            value: any;
+            value: string;
             placeholder: string;
             spellcheck: boolean;
             autocomplete: string;
@@ -1610,7 +1610,7 @@ declare namespace $ {
         };
         attr(): {
             maxlength: number;
-            type: any;
+            type: string;
         };
         event(): {
             input: (event?: any) => any;
@@ -1619,15 +1619,15 @@ declare namespace $ {
         plugins(): readonly any[];
         selection_watcher(): any;
         disabled(): boolean;
-        value(val?: any): any;
-        value_changed(val?: any): any;
+        value(val?: any): string;
+        value_changed(val?: any): string;
         hint(): string;
         spellcheck(): boolean;
         autocomplete_native(): string;
         selection_end(): number;
         selection_start(): number;
         length_max(): number;
-        type(val?: any): any;
+        type(val?: any): string;
         event_change(event?: any): any;
         event_key_press(event?: any): any;
         submit(event?: any): any;
@@ -1645,8 +1645,8 @@ declare namespace $.$$ {
         autocomplete_native(): "on" | "off";
         selection_watcher(): $mol_dom_listener;
         selection_change(event: Event): void;
-        selection_start(): any;
-        selection_end(): any;
+        selection_start(): number;
+        selection_end(): number;
     }
 }
 
@@ -1861,10 +1861,10 @@ declare namespace $ {
     class $mol_number extends $mol_view {
         precision_view(): number;
         precision_change(): number;
-        value(val?: any): any;
+        value(val?: any): number;
         sub(): readonly any[];
         precision(): number;
-        value_string(val?: any): any;
+        value_string(val?: any): string;
         hint(): string;
         enabled(): boolean;
         string_enabled(): boolean;
@@ -1887,7 +1887,7 @@ declare namespace $.$$ {
     class $mol_number extends $.$mol_number {
         event_dec(next?: Event): void;
         event_inc(next?: Event): void;
-        value_string(next?: string): any;
+        value_string(next?: string): string;
     }
 }
 
@@ -1908,7 +1908,9 @@ declare namespace $ {
         event(): {
             keydown: (event?: any) => any;
         };
-        showed(val?: any): any;
+        showed(val?: any): boolean;
+        align_vert(): string;
+        align_hor(): string;
         sub(): readonly any[];
         keydown(event?: any): any;
         Anchor(): any;
@@ -1950,15 +1952,15 @@ declare namespace $.$$ {
 declare namespace $ {
     class $mol_check extends $mol_button_minor {
         attr(): {
-            mol_check_checked: any;
-            "aria-checked": any;
+            mol_check_checked: boolean;
+            "aria-checked": boolean;
             role: string;
             disabled: boolean;
             tabindex: number;
             title: string;
         };
         sub(): readonly $mol_view_content[];
-        checked(val?: any): any;
+        checked(val?: any): boolean;
         Icon(): any;
         title(): string;
         Title(): $mol_view;
@@ -2102,13 +2104,13 @@ declare namespace $ {
     class $mol_date extends $mol_pick {
         Icon(): $mol_icon_calendar;
         bubble_content(): readonly any[];
-        value_number(val?: any): any;
-        value_moment(val?: any): any;
-        value(val?: any): any;
+        value_number(val?: any): number;
+        value_moment(val?: any): $mol_time_moment;
+        value(val?: any): string;
         hint(): string;
         enabled(): boolean;
         Input(): $$.$mol_string;
-        month_moment(): any;
+        month_moment(): $mol_time_moment;
         day_selected(day: any): boolean;
         day_click(day: any, event?: any): any;
         prev_hint(): string;
@@ -2139,9 +2141,9 @@ declare namespace $ {
 
 declare namespace $.$$ {
     class $mol_date extends $.$mol_date {
-        trigger_content(): (string | $mol_icon_calendar)[];
+        trigger_content(): string[];
         value(val?: string): string;
-        value_moment(val?: $mol_time_moment | null): $mol_time_moment | null;
+        value_moment(val?: $mol_time_moment): $mol_time_moment;
         month_moment(next?: $mol_time_moment): $mol_time_moment;
         day_selected(day: string): boolean;
         day_click(day: string): void;
@@ -2157,35 +2159,35 @@ declare namespace $ {
         title_block_label(): string;
         tools(): readonly any[];
         Tools(): $mol_view;
-        title(val?: any): any;
+        title(val?: any): string;
         enabled(): boolean;
         Title(): $$.$mol_string;
         Title_block(): $mol_labeler;
         result_mood(): string;
-        rate_annual(val?: any): any;
+        rate_annual(val?: any): number;
         Rate(): $$.$mol_number;
         Rate_block(): $hyoo_invest_labeler;
         Main(): $hyoo_invest_stock_row_group;
-        income(val?: any): any;
+        income(val?: any): number;
         Income(): $$.$mol_number;
         Income_block(): $hyoo_invest_labeler;
-        duration(val?: any): any;
+        duration(val?: any): number;
         Duration(): $$.$mol_number;
         Duration_block(): $mol_labeler;
         Results(): $hyoo_invest_stock_row_group;
         Info(): $hyoo_invest_stock_row_group;
-        enter_amount(val?: any): any;
+        enter_amount(val?: any): number;
         Enter_amount(): $$.$mol_number;
         Enter_amount_block(): $mol_labeler;
-        enter_date(val?: any): any;
+        enter_date(val?: any): $mol_time_moment;
         Enter_date(): $$.$mol_date;
         Enter_date_block(): $mol_labeler;
         Enter(): $hyoo_invest_stock_row_group;
-        exit_amount(val?: any): any;
+        exit_amount(val?: any): number;
         Exit_amount(): $$.$mol_number;
         Exit_amount_block(): $mol_labeler;
         exit_date_mood(): string;
-        exit_date(val?: any): any;
+        exit_date(val?: any): $mol_time_moment;
         Exit_date(): $$.$mol_date;
         Exit_date_block(): $hyoo_invest_labeler;
         Exit(): $hyoo_invest_stock_row_group;
@@ -2333,9 +2335,9 @@ declare namespace $ {
     class $mol_lights_toggle extends $mol_check_icon {
         Icon(): $mol_icon_brightness_6;
         hint(): string;
-        checked(val?: any): any;
+        checked(val?: any): boolean;
         Lights_icon(): $mol_icon_brightness_6;
-        lights(val?: any): any;
+        lights(val?: any): boolean;
     }
 }
 
