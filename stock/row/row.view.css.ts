@@ -75,7 +75,7 @@ namespace $ {
 			minWidth: 0,
 			maxWidth: rem(14),
 
-			Title: {
+			Label: {
 				justifyContent: 'space-between',
 				alignItems: 'flex-start',
 			},
@@ -87,31 +87,31 @@ namespace $ {
 		},
 
 		Enter_amount_block: {
-			Title: {
+			Label: {
 				justifyContent: 'flex-end',
 			},
 		},
 
 		Exit_amount_block: {
-			Title: {
+			Label: {
 				justifyContent: 'flex-end',
 			},
 		},
 
 		Duration_block: {
-			Title: {
+			Label: {
 				justifyContent: 'flex-end',
 			},
 		},
 
 		Rate_block: {
-			Title: {
+			Label: {
 				justifyContent: 'flex-end',
 			},
 		},
 
 		Income_block: {
-			Title: {
+			Label: {
 				justifyContent: 'flex-end',
 			},
 		},
