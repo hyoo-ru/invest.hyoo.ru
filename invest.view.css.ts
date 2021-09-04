@@ -9,7 +9,7 @@ namespace $ {
 		},
 
 		Stock_list: {
-			maxWidth: rem(80),
+			maxWidth: rem(100),
 			margin: 'auto',
 		},
 
