@@ -45,7 +45,7 @@ namespace $ {
 			}
 			
 			if( rate ) {
-				amount ??= this.value( 'enter_amount' ) * ( 1 + rate / 100 * this.duration() )
+				amount = amount ?? this.value( 'enter_amount' ) * ( 1 + rate / 100 * this.duration() )
 			}
 			
 			return amount ?? 0
@@ -58,7 +58,7 @@ namespace $ {
 			const exit_amount = this.value( 'exit_amount' , next && null )
 
 			if( exit_amount ) {
-				rate ??= ( ( exit_amount - this.value( 'enter_amount' ) ) / this.duration() / this.enter_amount() * 100 )
+				rate = rate ?? ( ( exit_amount - this.value( 'enter_amount' ) ) / this.duration() / this.enter_amount() * 100 )
 			}
 			
 			return rate ?? 0
