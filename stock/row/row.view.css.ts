@@ -86,36 +86,6 @@ namespace $ {
 			margin: rem(-.75),
 		},
 
-		Enter_amount_block: {
-			Label: {
-				justifyContent: 'flex-end',
-			},
-		},
-
-		Exit_amount_block: {
-			Label: {
-				justifyContent: 'flex-end',
-			},
-		},
-
-		Duration_block: {
-			Label: {
-				justifyContent: 'flex-end',
-			},
-		},
-
-		Rate_block: {
-			Label: {
-				justifyContent: 'flex-end',
-			},
-		},
-
-		Income_block: {
-			Label: {
-				justifyContent: 'flex-end',
-			},
-		},
-
 	} )
 
 }
