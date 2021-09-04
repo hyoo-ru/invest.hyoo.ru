@@ -115,7 +115,6 @@ declare namespace $ {
         [$mol_ambient_ref]: typeof $$;
         get $(): $;
         set $(next: $);
-        constructor(init?: (obj: any) => void);
         static create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
         static [Symbol.toPrimitive](): any;
         static toString(): any;
@@ -215,7 +214,13 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_log3_web_make<Close>(level: keyof Console, color: string): (this: $, event: $mol_log3_event<{}>) => () => void;
+    type $mol_type_keys_extract<Input, Upper> = {
+        [Field in keyof Input]: unknown extends Input[Field] ? never : Input[Field] extends never ? never : Input[Field] extends Upper ? Field : never;
+    }[keyof Input];
+}
+
+declare namespace $ {
+    function $mol_log3_web_make(level: $mol_type_keys_extract<Console, Function>, color: string): (this: $, event: $mol_log3_event<{}>) => () => void;
 }
 
 declare namespace $ {
@@ -497,7 +502,7 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_dom_render_children(el: Element, childNodes: NodeList | Array<Node | string | null>): void;
+    function $mol_dom_render_children(el: Element | DocumentFragment, childNodes: NodeList | Array<Node | string | null>): void;
 }
 
 declare namespace $ {
@@ -519,12 +524,6 @@ declare namespace $ {
 
 declare namespace $ {
     function $mol_deprecated(message: string): <Method extends (this: Host, ...args: readonly any[]) => any, Host extends { [key in Field]: Method; }, Field extends keyof Host>(host: Host, field: Field, descr: TypedPropertyDescriptor<Method>) => void;
-}
-
-declare namespace $ {
-    type $mol_type_keys_extract<Input, Upper> = {
-        [Field in keyof Input]: unknown extends Input[Field] ? never : Input[Field] extends never ? never : Input[Field] extends Upper ? Field : never;
-    }[keyof Input];
 }
 
 declare namespace $ {
@@ -2162,9 +2161,6 @@ declare namespace $ {
         Lights_icon(): $mol_icon_brightness_6;
         lights(val?: any): boolean;
     }
-}
-
-declare namespace $ {
 }
 
 declare namespace $.$$ {
