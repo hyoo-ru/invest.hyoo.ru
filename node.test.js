@@ -2419,7 +2419,10 @@ var $;
         }
         dom_node_actual() {
             const node = this.dom_node();
-            $.$mol_dom_render_styles(node, { minHeight: this.minimal_height() });
+            $.$mol_dom_render_styles(node, {
+                minHeight: this.minimal_height(),
+                minWidth: this.minimal_width(),
+            });
             const attr = this.attr();
             const style = this.style();
             const fields = this.field();
@@ -2996,6 +2999,9 @@ var $;
             minimal_height() {
                 return this.$.$mol_print.active() ? null : 0;
             }
+            minimal_width() {
+                return this.$.$mol_print.active() ? null : 0;
+            }
         }
         __decorate([
             $.$mol_mem
@@ -3172,7 +3178,6 @@ var $;
                     basis: per(100),
                 },
                 margin: 0,
-                padding: $.$mol_gap.block,
             },
             Foot: {
                 display: 'flex',
@@ -5135,7 +5140,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $.$mol_style_attach("mol/labeler/labeler.view.css", "[mol_labeler] {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: stretch;\n\tcursor: inherit;\n}\n\n[mol_labeler_label] {\n\tcolor: var(--mol_theme_shade);\n\tpadding: 0 .75rem;\n}\n\n[mol_labeler_content] {\n\tdisplay: flex;\n}\n");
+    $.$mol_style_attach("mol/labeler/labeler.view.css", "[mol_labeler] {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: stretch;\n\tcursor: inherit;\n}\n\n[mol_labeler_label] {\n\tcolor: var(--mol_theme_shade);\n}\n\n[mol_labeler_content] {\n\tdisplay: flex;\n}\n");
 })($ || ($ = {}));
 //labeler.view.css.js.map
 ;
@@ -5795,6 +5800,11 @@ var $;
         }
         sub() {
             return [
+                this.Anchor()
+            ];
+        }
+        sub_visible() {
+            return [
                 this.Anchor(),
                 this.Bubble()
             ];
@@ -5882,7 +5892,7 @@ var $;
                 this.focused();
                 return next;
             }
-            sub() {
+            sub_visible() {
                 return [
                     this.Anchor(),
                     ...this.showed() ? [this.Bubble()] : [],
@@ -6061,6 +6071,8 @@ var $;
         }
         Trigger() {
             const obj = new this.$.$mol_check();
+            obj.minimal_width = () => 40;
+            obj.minimal_height = () => 40;
             obj.enabled = () => this.trigger_enabled();
             obj.checked = (event) => this.showed(event);
             obj.sub = () => this.trigger_content();
