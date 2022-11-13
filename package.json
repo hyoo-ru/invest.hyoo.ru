@@ -121,6 +121,7 @@
     "$mol_string",
     "$mol_hotkey",
     "$mol_keyboard",
+    "$mol_layer",
     "$mol_labeler",
     "$mol_list",
     "$mol_support_css",
