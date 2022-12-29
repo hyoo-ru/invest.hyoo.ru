@@ -116,10 +116,10 @@ declare namespace $ {
         get $(): $;
         set $(next: $);
         static create<Instance>(this: new (init?: (instance: any) => void) => Instance, init?: (instance: $mol_type_writable<Instance>) => void): Instance;
-        static [Symbol.toPrimitive](): unknown;
-        static toString(): unknown;
+        static [Symbol.toPrimitive](): string;
+        static toString(): string;
         destructor(): void;
-        toString(): any;
+        toString(): string;
         toJSON(): any;
     }
 }
@@ -557,7 +557,7 @@ declare namespace $ {
             top: number;
             bottom: number;
         } | null;
-        dom_id(): any;
+        dom_id(): string;
         dom_node(next?: Element): Element;
         dom_final(): Element | undefined;
         dom_tree(next?: Element): Element;
@@ -1911,6 +1911,7 @@ declare namespace $ {
     class $mol_calendar extends $mol_list {
         sub(): readonly any[];
         weeks(): readonly $mol_view[];
+        weeks_count(): number;
         Weekday(id: any): $mol_calendar_day;
         Week(id: any): $$.$mol_hor;
         Day(id: any): $mol_calendar_day;
@@ -1961,7 +1962,6 @@ declare namespace $.$$ {
         weekdays(): $mol_view[];
         weekday(index: number): string;
         weekend(index: number): boolean;
-        weeks_count(): number;
         sub(): any[];
         weeks(): $mol_view[];
         week_days(index: number): $mol_view[];

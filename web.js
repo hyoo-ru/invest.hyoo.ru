@@ -1569,6 +1569,8 @@ var $;
     function $mol_fail_catch(error) {
         if (typeof error !== 'object')
             return false;
+        if (error instanceof Promise)
+            $mol_fail_hidden(error);
         if (cacthed.get(error))
             return false;
         cacthed.set(error, true);
@@ -5339,7 +5341,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/button/typed/typed.view.css", "[mol_button_typed] {\n\talign-content: center;\n\talign-items: center;\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tgap: var(--mol_gap_space);\n\tuser-select: none;\n\tcursor: pointer;\n}\n\n[mol_button_typed][disabled] {\n\tpointer-events: none;\n}\n\n[mol_button_typed]:hover ,\n[mol_button_typed]:focus {\n\tbackground-color: var(--mol_theme_hover);\n}\n\n[mol_button_typed]:hover [mol_icon] ,\n[mol_button_typed]:focus [mol_icon] {\n\ttransform: scale(1.5);\n}\n\n[mol_button_typed]:active {\n\tcolor: var(--mol_theme_focus);\n}\n\n");
+    $mol_style_attach("mol/button/typed/typed.view.css", "[mol_button_typed] {\n\talign-content: center;\n\talign-items: center;\n\tpadding: var(--mol_gap_text);\n\tborder-radius: var(--mol_gap_round);\n\tgap: var(--mol_gap_space);\n\tuser-select: none;\n\tcursor: pointer;\n}\n\n[mol_button_typed][disabled] {\n\tpointer-events: none;\n}\n\n[mol_button_typed]:hover ,\n[mol_button_typed]:focus {\n\tbackground-color: var(--mol_theme_hover);\n}\n\n[mol_button_typed]:active {\n\tcolor: var(--mol_theme_focus);\n}\n\n");
 })($ || ($ = {}));
 //mol/button/typed/-css/typed.view.css.ts
 ;
@@ -6123,6 +6125,9 @@ var $;
         weeks() {
             return [];
         }
+        weeks_count() {
+            return 6;
+        }
         Weekday(id) {
             const obj = new this.$.$mol_calendar_day();
             obj.holiday = () => this.weekend(id);
@@ -6308,13 +6313,6 @@ var $;
             weekend(index) {
                 return [5, 6].indexOf(index) >= 0;
             }
-            weeks_count() {
-                const interval = new $mol_time_interval({
-                    start: this.day_draw_from(),
-                    end: this.day_last(),
-                });
-                return Math.ceil(interval.duration.count({ day: 7 }));
-            }
             sub() {
                 return [
                     ...super.sub(),
@@ -6371,9 +6369,6 @@ var $;
         __decorate([
             $mol_mem_key
         ], $mol_calendar.prototype, "weekday", null);
-        __decorate([
-            $mol_mem
-        ], $mol_calendar.prototype, "weeks_count", null);
         __decorate([
             $mol_mem
         ], $mol_calendar.prototype, "sub", null);
@@ -6621,7 +6616,7 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    $mol_style_attach("mol/date/date.view.css", "[mol_date_bubble] {\n\tpadding: .5rem;\n}\n\n[mol_date_prev] ,\n[mol_date_next] {\n\tflex-grow: 1;\n}\n[mol_date_prev] {\n\tjustify-content: flex-end;\n}\n\n[mol_date_calendar_title] {\n\tpadding: var(--mol_gap_text);\n}\n\n[mol_date_calendar_day] {\n\tpadding: 0;\n}\n\n[mol_date_calendar_day_button] {\n\twidth: 100%;\n\tpadding: .25rem .5rem;\n\tjustify-content: center;\n\tcursor: pointer;\n\tcolor: inherit;\n}\n");
+    $mol_style_attach("mol/date/date.view.css", "[mol_date_bubble] {\n\tpadding: .5rem;\n}\n\n[mol_date_input] {\n\tflex-shrink: 0;\n}\n\n[mol_date_prev] ,\n[mol_date_next] {\n\tflex-grow: 1;\n}\n[mol_date_prev] {\n\tjustify-content: flex-end;\n}\n\n[mol_date_calendar_title] {\n\tpadding: var(--mol_gap_text);\n}\n\n[mol_date_calendar_day] {\n\tpadding: 0;\n}\n\n[mol_date_calendar_day_button] {\n\twidth: 100%;\n\tpadding: .25rem .5rem;\n\tjustify-content: center;\n\tcursor: pointer;\n\tcolor: inherit;\n}\n");
 })($ || ($ = {}));
 //mol/date/-css/date.view.css.ts
 ;
@@ -7438,17 +7433,11 @@ var $;
             background: {
                 color: $mol_theme.hover,
             },
-            $mol_icon: {
-                transform: 'scale(1.5)',
-            },
         },
         ':focus': {
             outline: 'none',
             background: {
                 color: $mol_theme.hover,
-            },
-            $mol_icon: {
-                transform: 'scale(1.5)',
             },
         },
         ':focus-within': {
