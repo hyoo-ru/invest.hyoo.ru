@@ -1486,6 +1486,7 @@ declare namespace $ {
             selectionEnd: number;
             selectionStart: number;
             inputMode: string;
+            enterkeyhint: string;
         };
         attr(): {
             maxlength: number;
@@ -1506,6 +1507,7 @@ declare namespace $ {
         selection_end(): number;
         selection_start(): number;
         keyboard(): string;
+        enter(): string;
         length_max(): number;
         type(val?: any): string;
         event_change(event?: any): any;
