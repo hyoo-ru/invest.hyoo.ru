@@ -17,7 +17,7 @@ $hyoo_invest $mol_page
 			<= Stock_drop!id $mol_button_minor
 				click?event <=> stock_drop!id?event null
 				sub /
-					<= Stock_drop_icon!id $mol_icon_cross
+					<= Stock_drop_icon!id $mol_icon_close
 	Stock_summary $hyoo_invest_stock_row
 		enabled false
 		rate_annual <= rate_annual 0
